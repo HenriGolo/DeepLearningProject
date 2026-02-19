@@ -259,7 +259,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.image_files = [
-            f for f in os.listdir(".") if f.lower().endswith(".png")
+            f for f in os.listdir(".") if f.lower().endswith(".jpg")
         ]
         self.index = 0
 
