@@ -1,20 +1,18 @@
-import sys
 import os
-from PyQt5.QtWidgets import (
-    QApplication, QMainWindow, QLabel, QPushButton,
-    QVBoxLayout, QWidget, QRadioButton, QGroupBox
-)
-from PyQt5.QtGui import QPixmap, QPainter, QPen
-from PyQt5.QtCore import Qt, QRect, QPoint
+import sys
 
+from PyQt5.QtCore import QPoint, QRect, Qt
+from PyQt5.QtGui import QPainter, QPen, QPixmap
+from PyQt5.QtWidgets import (QApplication, QGroupBox, QLabel, QMainWindow, QPushButton, QRadioButton, QVBoxLayout,
+                             QWidget)
 
 ANNOTATION_FILE = "annotation.txt"
 SIZE_MIN = 10
 
 CLASSES = {
-    "chat": 0,
-    "chien": 1,
-    "voiture": 2
+    "pierre": 0,
+    "feuille": 1,
+    "ciseau": 2
 }
 
 
@@ -45,7 +43,6 @@ class ImageLabel(QLabel):
 
         self.resizing = False
         self.resize_corner = None
-        
 
     # ------------------------------------------------------
     # OFFSET IMAGE DANS LABEL
@@ -92,7 +89,7 @@ class ImageLabel(QLabel):
                 self.selected_index = i
                 # Met à jour les boutons radio de classe pour la box sélectionnée
                 self.main_window.update_class_selection()
-                
+
                 # Vérifier si clic sur poignée de redimensionnement
                 corner = self.get_corner(rect, pos)
                 if corner:
@@ -258,9 +255,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.image_files = [
-            f for f in os.listdir(".") if f.lower().endswith(".jpg")
-        ]
+        path = "DB_images"
+        self.image_files = [f"{path}/{f}" for f in os.listdir(path) if f.lower().endswith(".jpg")]
         self.index = 0
 
         self.label = ImageLabel(self)
@@ -329,8 +325,8 @@ class MainWindow(QMainWindow):
             bh = box["h"]
             class_id = box["class_id"]
 
-            x_center = (x + bw/2) / w
-            y_center = (y + bh/2) / h
+            x_center = (x + bw / 2) / w
+            y_center = (y + bh / 2) / h
             width = bw / w
             height = bh / h
 
@@ -358,8 +354,8 @@ class MainWindow(QMainWindow):
 
                     rect_w = bw * w
                     rect_h = bh * h
-                    x = xc * w - rect_w/2
-                    y = yc * h - rect_h/2
+                    x = xc * w - rect_w / 2
+                    y = yc * h - rect_h / 2
 
                     self.label.boxes.append({
                         "x": x,
