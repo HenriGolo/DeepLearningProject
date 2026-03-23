@@ -5,6 +5,7 @@ IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
 DATA_TYPE = "TRAIN" #TEST
 LABELISER_CLASS_PATH = os.path.join(os.path.dirname(__file__), 'labelizer', 'labelImg-master', 'data', 'predefined_classes.txt') # fichier class du labeliseur
 DICO_CLASS = {}
+DICO_CLASS_NUMBER = {}
 def find_image(base_path, name):
     for ext in IMAGE_EXTS:
         img_path = os.path.join(base_path, name + ext)
@@ -25,7 +26,7 @@ def get_classes():
     with open(LABELISER_CLASS_PATH, "r") as f:
         for idx, line in enumerate(f, start=0):
             DICO_CLASS[idx] = line[:-1]
-    
+            DICO_CLASS_NUMBER[line[:-1]] = 0
 
 def process_folder(folder_path, output_file):
     global DICO_CLASS
@@ -49,14 +50,15 @@ def process_folder(folder_path, output_file):
 
                         # Format YOLO direct (normalisé)
                         cls, x, y, w, h = parts
-
+                        DICO_CLASS_NUMBER[DICO_CLASS[int(cls)]]+=1
                         out.write(
                             f"{DATA_TYPE}\t{DICO_CLASS[int(cls)]}\t{img_path}\t{x}\t{y}\t{w}\t{h}\n"
                         )
 
 if __name__ == "__main__":
-    dossier = input("Chemin du dossier : ") #./DB_images
+    dossier ="./DB_images" #input("Chemin du dossier : ") #./DB_images
     output = "labels_formates.txt"
     get_classes()
     process_folder(dossier, output)
     print("Fichier généré !")
+    print(DICO_CLASS_NUMBER)
