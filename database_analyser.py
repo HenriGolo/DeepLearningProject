@@ -60,5 +60,13 @@ if __name__ == "__main__":
     output = "labels_formates.txt"
     get_classes()
     process_folder(dossier, output)
+
+    dossier ="./Images_Internet" 
+    output = "labels_formates.txt"
+    process_folder(dossier, output)
     print("Fichier généré !")
     print(DICO_CLASS_NUMBER)
+    tot=0
+    for i in DICO_CLASS_NUMBER.values():
+        tot+=i
+    print("total : "+str(tot))
