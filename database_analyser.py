@@ -1,11 +1,14 @@
 import os
 
 # Extensions d'image possibles
-IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp"]
+IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp"]
+DOSSIERS = ["./DB_images","./Images_Internet","./images_Temp"]
 DATA_TYPE = "TRAIN" #TEST
 LABELISER_CLASS_PATH = os.path.join(os.path.dirname(__file__), 'labelizer', 'labelImg-master', 'data', 'predefined_classes.txt') # fichier class du labeliseur
 DICO_CLASS = {}
-DICO_CLASS_NUMBER = {}
+DICO_DICO_CLASS_NUMBER = {}
+dico_classe_number = {}
+
 def find_image(base_path, name):
     for ext in IMAGE_EXTS:
         img_path = os.path.join(base_path, name + ext)
@@ -23,10 +26,14 @@ def yolo_to_bbox(x_center, y_center, w, h, img_w, img_h):
 def get_classes():
     global LABELISER_CLASS_PATH
     global DICO_CLASS
+    global dico_classe_number
     with open(LABELISER_CLASS_PATH, "r") as f:
         for idx, line in enumerate(f, start=0):
             DICO_CLASS[idx] = line[:-1]
-            DICO_CLASS_NUMBER[line[:-1]] = 0
+            dico_classe_number[line[:-1]] = 0
+    
+    for i in DOSSIERS:
+        DICO_DICO_CLASS_NUMBER[i]=dico_classe_number.copy()
 
 def process_folder(folder_path, output_file):
     global DICO_CLASS
@@ -50,23 +57,25 @@ def process_folder(folder_path, output_file):
 
                         # Format YOLO direct (normalisé)
                         cls, x, y, w, h = parts
-                        DICO_CLASS_NUMBER[DICO_CLASS[int(cls)]]+=1
+                        DICO_DICO_CLASS_NUMBER[folder_path][DICO_CLASS[int(cls)]]+=1
                         out.write(
                             f"{DATA_TYPE}\t{DICO_CLASS[int(cls)]}\t{img_path}\t{x}\t{y}\t{w}\t{h}\n"
                         )
 
 if __name__ == "__main__":
-    dossier ="./DB_images" #input("Chemin du dossier : ") #./DB_images
     output = "labels_formates.txt"
     get_classes()
-    process_folder(dossier, output)
+    for dossier in DOSSIERS:
+        process_folder(dossier, output)
 
-    dossier ="./Images_Internet" 
-    output = "labels_formates.txt"
-    process_folder(dossier, output)
     print("Fichier généré !")
-    print(DICO_CLASS_NUMBER)
+    print(DICO_DICO_CLASS_NUMBER)
+    dico_tot = dico_classe_number.copy()
+
     tot=0
-    for i in DICO_CLASS_NUMBER.values():
-        tot+=i
+    for i in DICO_DICO_CLASS_NUMBER.values():
+        for classe in i:
+            tot+=i[classe]
+            dico_tot[classe]+=i[classe]
+    print("total proportions : "+str(dico_tot))
     print("total : "+str(tot))
