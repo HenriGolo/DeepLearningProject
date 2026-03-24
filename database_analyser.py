@@ -2,7 +2,7 @@ import os
 
 # Extensions d'image possibles
 IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp"]
-DOSSIERS = ["./DB_images","./Images_Internet","./images_Temp"]
+DOSSIERS = ["./TRAIN", "./TEST"]
 DATA_TYPE = "TRAIN" #TEST
 LABELISER_CLASS_PATH = os.path.join(os.path.dirname(__file__), 'labelizer', 'labelImg-master', 'data', 'predefined_classes.txt') # fichier class du labeliseur
 DICO_CLASS = {}
@@ -63,7 +63,7 @@ def process_folder(folder_path, output_file):
                         )
 
 if __name__ == "__main__":
-    output = "labels_formates.txt"
+    output = "liste_db.txt"
     get_classes()
     for dossier in DOSSIERS:
         process_folder(dossier, output)
@@ -73,9 +73,11 @@ if __name__ == "__main__":
     dico_tot = dico_classe_number.copy()
 
     tot=0
-    for i in DICO_DICO_CLASS_NUMBER.values():
-        for classe in i:
-            tot+=i[classe]
-            dico_tot[classe]+=i[classe]
+    for i in DICO_DICO_CLASS_NUMBER:
+        iValue = DICO_DICO_CLASS_NUMBER[i]
+        print(i.split("/")[-1]+" : "+str(iValue))
+        for classe in iValue:
+            tot+=iValue[classe]
+            dico_tot[classe]+=iValue[classe]
     print("total proportions : "+str(dico_tot))
     print("total : "+str(tot))
