@@ -62,7 +62,3 @@ if __name__ == "__main__":
     process_folder(dossier, output)
     print("Fichier généré !")
     print(DICO_CLASS_NUMBER)
-    nb_tot = 0
-    for i in DICO_CLASS_NUMBER:
-        nb_tot+=DICO_CLASS_NUMBER[i]
-    print("Nombre de labels : " + str(nb_tot))
