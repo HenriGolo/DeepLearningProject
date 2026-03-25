@@ -87,5 +87,5 @@ if __name__ == "__main__":
     
     for k,v in local_tot_dico.items():
         print(k.split("/")[-1]+" : "+str(round((v/tot)*100,1))+"%")
-    print("total classe proportions : "+str(dico_tot))
+    print("total classes proportions : "+str(dico_tot))
     print("total : "+str(tot))
