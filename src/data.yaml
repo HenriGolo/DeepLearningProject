@@ -1,0 +1,9 @@
+path: .. #dataset
+
+train: ../TRAIN #images for train
+val: ../VALIDATION # images for validation
+
+names:
+  0: rock
+  1: paper
+  2: scissors
