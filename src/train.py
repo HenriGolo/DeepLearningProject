@@ -11,7 +11,7 @@ def train_model():
         imgsz=640,          # taille des images
         batch=16,           # adapte selon ton GPU
         name="pfc_model",   # nom de l'expérience
-        device=0            # 0 = GPU, "cpu" sinon
+        device="cpu"            # 0 = GPU, "cpu" sinon
     )
 
 if __name__ == "__main__":

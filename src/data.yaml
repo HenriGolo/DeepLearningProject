@@ -1,7 +1,7 @@
-path: .. #dataset
+path: ../dataset #dataset
 
-train: ../TRAIN #images for train
-val: ../VALIDATION # images for validation
+train: ../dataset/images/train #images for train
+val: ../dataset/images/val # images for validation
 
 names:
   0: rock
