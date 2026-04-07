@@ -1,8 +1,8 @@
 import os
 
 # Extensions d'image possibles
-IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp"]
-DOSSIERS = ["./TRAIN", "./TEST"]
+IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".jfif"]
+DOSSIERS = ["./TRAIN", "./TEST", "./VALIDATION"]
 DATA_TYPE = "TRAIN" #TEST
 LABELISER_CLASS_PATH = os.path.join(os.path.dirname(__file__), 'labelizer', 'labelImg-master', 'data', 'predefined_classes.txt') # fichier class du labeliseur
 DICO_CLASS = {}
@@ -45,7 +45,7 @@ def process_folder(folder_path, output_file):
 
                 img_path = find_image(folder_path, base_name)
                 if img_path is None:
-                    print(f"Image non trouvée pour {file}")
+                    print(f"Image non trouvée pour {file} : {folder_path}")
                     continue
 
                 # Lire annotations
@@ -71,13 +71,21 @@ if __name__ == "__main__":
     print("Fichier généré !")
     print(DICO_DICO_CLASS_NUMBER)
     dico_tot = dico_classe_number.copy()
-
+    local_tot_dico = {}
+    for i in DOSSIERS:
+        local_tot_dico[i] = 0
+        
     tot=0
     for i in DICO_DICO_CLASS_NUMBER:
         iValue = DICO_DICO_CLASS_NUMBER[i]
         print(i.split("/")[-1]+" : "+str(iValue))
         for classe in iValue:
+            local_tot_dico[i]+=iValue[classe]
             tot+=iValue[classe]
             dico_tot[classe]+=iValue[classe]
-    print("total proportions : "+str(dico_tot))
+        print(i.split("/")[-1]+" total : "+str(local_tot_dico[i]))
+    
+    for k,v in local_tot_dico.items():
+        print(k.split("/")[-1]+" : "+str(round((v/tot)*100,1))+"%")
+    print("total classes proportions : "+str(dico_tot))
     print("total : "+str(tot))
