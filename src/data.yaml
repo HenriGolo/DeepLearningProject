@@ -2,6 +2,7 @@ path: ../dataset #dataset
 
 train: ../dataset/images/train #images for train
 val: ../dataset/images/val # images for validation
+test: ../dataset/images/test # images for test
 
 names:
   0: rock
