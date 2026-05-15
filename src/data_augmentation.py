@@ -37,7 +37,7 @@ def read_yolo_labels(label_path):
 def write_yolo_labels(label_path, bboxes, class_labels):
     with open(label_path, "w") as f:
         for cls, box in zip(class_labels, bboxes):
-            f.write(f"{cls} {box[0]:.6f} {box[1]:.6f} {box[2]:.6f} {box[3]:.6f}\n")
+            f.write(f"{int(cls)} {box[0]:.6f} {box[1]:.6f} {box[2]:.6f} {box[3]:.6f}\n")
 
 all_img_paths = [
     os.path.join(TRAIN_DIR, f)
