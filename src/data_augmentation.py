@@ -7,13 +7,17 @@ IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".jfif"]
 TRAIN_DIR = "./TRAIN"
 NUM_AUG = 300
 
-transform = A.Compose([
-    A.Rotate(limit=30, border_mode=cv2.BORDER_REFLECT_101, p=0.7),
+"""A.Rotate(limit=30, border_mode=cv2.BORDER_REFLECT_101, p=0.7),
     A.HorizontalFlip(p=0.5),
     A.RandomBrightnessContrast(p=0.5),
     A.HueSaturationValue(p=0.4),
     A.GaussianBlur(blur_limit=(3, 7), p=0.3),
-    A.RandomScale(scale_limit=0.2, p=0.3),
+    A.RandomScale(scale_limit=0.2, p=0.3),"""
+transform = A.Compose([
+    A.MotionBlur(blur_limit=(3, 9), p=0.3),   # flou de mouvement (réaliste pour webcam)
+    A.ImageCompression(quality_lower=60, p=0.3),  # simule compression JPEG basse qualité
+    A.RandomShadow(p=0.2),                     # ombres portées sur la main
+    A.CoarseDropout(max_holes=4, max_height=30, max_width=30, p=0.3),  # occlusions partielles
 ], bbox_params=A.BboxParams(
     format="yolo",
     label_fields=["class_labels"],
