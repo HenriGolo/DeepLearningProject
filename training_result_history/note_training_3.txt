@@ -1,2 +1,2 @@
-100 epoch
-augmentation de données sur train
+
+augmentation de données sur train modifiée :
