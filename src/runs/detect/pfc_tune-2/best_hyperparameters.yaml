@@ -1,0 +1,31 @@
+# 30/30 iterations complete ✅ (9268.32s)
+# Results saved to D:\CODING\DeepLearningProject\src\runs\detect\pfc_tune-2
+# Best fitness=0.63394 observed at iteration 15
+# Best fitness metrics are {'metrics/precision(B)': 0.78402, 'metrics/recall(B)': 0.82939, 'metrics/mAP50(B)': 0.83951, 'metrics/mAP50-95(B)': 0.63394, 'val/box_loss': 0.64247, 'val/cls_loss': 0.62698, 'val/dfl_loss': 0.76113, 'fitness': 0.63394}
+# Best fitness model is D:\CODING\DeepLearningProject\src\runs\detect\pfc_tune-2\weights
+lr0: 0.004
+lrf: 0.01289
+momentum: 0.96157
+weight_decay: 0.00038
+warmup_epochs: 3.83887
+warmup_momentum: 0.7684
+box: 5.0347
+cls: 0.39708
+cls_pw: 0.00344
+dfl: 1.06117
+hsv_h: 0.02894
+hsv_s: 0.69035
+hsv_v: 0.43702
+degrees: 0.0
+translate: 0.06782
+scale: 0.48774
+shear: 0.00081
+perspective: 0.0005
+flipud: 0.00742
+fliplr: 0.52641
+bgr: 0.00499
+mosaic: 1.0
+mixup: 0.00173
+cutmix: 0.0
+copy_paste: 0.00075
+close_mosaic: 9
