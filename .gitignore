@@ -2,3 +2,7 @@
 .vscode
 __pycache__
 .envrc
+src/yolo_env/
+venv/
+*.pt
+*.pth

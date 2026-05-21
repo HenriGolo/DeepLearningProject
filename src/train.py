@@ -7,11 +7,11 @@ def train_model():
     # Lancer l'entraînement
     results = model.train(
         data="data.yaml",   # chemin vers ton fichier yaml
-        epochs=50,          # nombre d'epochs
+        epochs=100,          # nombre d'epochs
         imgsz=640,          # taille des images
         batch=16,           # adapte selon ton GPU
         name="pfc_model",   # nom de l'expérience
-        device="cpu"            # 0 = GPU, "cpu" sinon
+        device="0"            # 0 = GPU, "cpu" sinon
     )
 
 if __name__ == "__main__":

@@ -1,0 +1,2 @@
+pfc_model_3 100 epoch + preaugmentation without rotation
+pfc_model_4 100 epoch without augmentation

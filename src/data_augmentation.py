@@ -4,7 +4,7 @@ import cv2
 import albumentations as A
 
 IMAGE_EXTS = [".jpg", ".jpeg", ".png", ".bmp", ".webp", ".jfif"]
-TRAIN_DIR = "./TRAIN"
+TRAIN_DIR = "./../TRAIN"
 NUM_AUG = 300
 
 """A.Rotate(limit=30, border_mode=cv2.BORDER_REFLECT_101, p=0.7),
