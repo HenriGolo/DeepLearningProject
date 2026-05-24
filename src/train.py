@@ -7,8 +7,8 @@ def train_model():
     # Lancer l'entraînement
     results = model.train(
         data="data.yaml",
-        epochs=150,
-        patience=25,
+        epochs=500,
+        patience=100,
         imgsz=640,
         batch=16,
         name="pfc_model",
@@ -32,7 +32,7 @@ def train_model():
         fliplr=0.52641,
         mosaic=1.0,
         mixup=0.00173,
-        close_mosaic=9,
+        close_mosaic=25, #9
         degrees=0.0,
     )
 
