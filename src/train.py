@@ -1,17 +1,16 @@
 from ultralytics import YOLO
 
 def train_model():
-    # Charger un modèle pré-entraîné (recommandé)
-    model = YOLO("yolov8s.pt")  # ou yolov8n.pt pour plus léger
+    # Charge modèle pré-entraîné 
+    model = YOLO("yolov8s.pt")  #yolov8s.pt
 
-    # Lancer l'entraînement
     results = model.train(
         data="data.yaml",
-        epochs=500,
-        patience=100,
+        epochs=150,
+        patience=25,
         imgsz=640,
         batch=16,
-        name="pfc_model",
+        name="first_train_50_epoch",
         device="0",
         # meilleurs hyperparamètres trouvés par tune()
         lr0=0.004,
@@ -32,7 +31,7 @@ def train_model():
         fliplr=0.52641,
         mosaic=1.0,
         mixup=0.00173,
-        close_mosaic=25, #9
+        close_mosaic=9, #9
         degrees=0.0,
     )
 

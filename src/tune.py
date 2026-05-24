@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 def tune_model():
-    model = YOLO("yolov8s.pt")
+    model = YOLO("yolov8n.pt")
 
     model.tune(
         data="data.yaml",
